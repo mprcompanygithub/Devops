@@ -1,0 +1,72 @@
+- name: Deploy Static Website from Git on Slave Node
+  hosts: slave1 # Specify the target slave node
+  become: yes # Run tasks with sudo
+  tasks:
+    - name: Install required packages (Apache and Git)
+      yum: # Use 'apt' for Ubuntu/Debian
+        name:
+          - httpd
+          - git
+        state: present
+
+    - name: Clone the Git repository
+      git:
+        repo: "https://github.com/RAJADHURAI1819/SHOWTV.git" # Replace with your repository URL
+        dest: /var/www/html # Default directory for Apache web files
+        version: main # Specify the branch or tag
+
+    - name: Rename ttt.html to index.html
+      command: mv /var/www/html/ttt.html /var/www/html/index.html
+
+    - name: Start Apache service
+      service:
+        name: httpd
+        state: started
+        enabled: yes # Ensure Apache starts on boot
+- name: Deploy Static Website from Git on Slave Node
+  hosts: slave2 # Specify the target slave node
+  become: yes # Run tasks with sudo
+  tasks:
+    - name: Install required packages (Apache and Git)
+      yum: # Use 'apt' for Ubuntu/Debian
+        name:
+          - httpd
+          - git
+        state: present
+
+    - name: Clone the Git repository
+      git:
+        repo: "https://github.com/RAJADHURAI1819/Calculator.git" # Replace with your repository URL
+        dest: /var/www/html # Default directory for Apache web files
+        version: main # Specify the branch or tag
+    - name: Start Apache service
+      service:
+        name: httpd
+        state: started
+        enabled: yes # Ensure Apache starts on boot
+- name: Deploy Static Website from Git on Slave Node
+  hosts: slave3 # Specify the target slave node
+  become: yes # Run tasks with sudo
+  tasks:
+    - name: Install required packages (Apache and Git)
+      yum: # Use 'apt' for Ubuntu/Debian
+        name:
+          - httpd
+          - git
+        state: present
+
+    - name: Clone the Git repository
+      git:
+        repo: "https://github.com/RAJADHURAI1819/Snake-Game.git" # Replace with your repository URL
+        dest: /var/www/html # Default directory for Apache web files
+        version: main # Specify the branch or tag
+
+    - name: Rename snake.html to index.html
+      command: mv /var/www/html/snake.html /var/www/html/index.html
+
+    - name: Start Apache service
+      service:
+        name: httpd
+        state: started
+        enabled: yes # Ensure Apache starts on boot
+
